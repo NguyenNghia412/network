@@ -1,0 +1,41 @@
+Lab: 
+- Có 1 Multilayer Switch (Layer 3 Switch), 1 Access Switch, 2 host nằm ở vlan 10 và 20
+- Dùng ASW chia vlan và L3SW để routing giữa các vlan
+- Nói chung là giống như ROS (Router On a Stick) nhưng dùng L3SW để routing thay vì Router
+- Đọc thêm về SVI, Multilayer switch, inter vlan routing
+==========================================================
+1. Config cho 2 host.
+- Host A: vlan 10, ip 10.1.10.2/24, gateway 10.1.10.1, nối vào fa0/2 của ASW
+- Host B: vlan 20, ip 10.1.20.2/24, gateway 10.1.20.1, nối vào fa0/3 của ASW
+2. Config cho ASW
+- Nối fa0/1 của ASW vào fa0/1 của DSW
+*Tạo vlan
+vl 10
+vl 20
+*Chia vlan
+int fa 0/2
+sw mod acc
+sw acc vl 10
+int fa 0/3
+sw mod acc
+sw acc vl 20
+*Tạo trunk port cho fa0/1
+int fa0/1
+sw mod trunk
+3. Config cho L3SW
+*Tạo vlan
+vl 10
+vl 20
+* Tạo SVI
+int vl 10
+ip add 10.1.10.1 255.255.255.0 => Các host sẽ dùng default gateway theo ip set trên SVI này
+no sh
+int vl 20
+ip add 10.1.20.1 255.255.255.0
+no sh
+* Tạo trunk port cho fa0/1
+int fa0/1
+sw trunk encapsulation dot1q
+sw mod trunk
+* Bật mode routing cho L3SW
+ip routing

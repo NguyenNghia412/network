@@ -1,0 +1,14 @@
+*show
+sh ip dhcp pool
+sh ip dhcp binding
+==================================
+*config
+ip dhcp pool internal => Tạo dhcp pool và đặt tên là internal.
+network 172.16.10.0 255.255.255.0 => Defines the range of addresses to be leased.
+default-router 172.16.10.1 => Defines the address of the default router for the client.
+dns-server 172.16.10.10 => Defines the address of the Domain Name System (DNS) server for the client.
+domain-name fakedomainname.ca => Gán tên domain cho dhcp srv
+lease 14 12 23 => sDefines the lease time to be 14 days, 12 hours, 23 minutes.
+ip dhcp exclude-address [ip 1] [ip 2]... => Mode config, ko cấp các ip này
+service dhcp
+no service dhcp

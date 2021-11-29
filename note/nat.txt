@@ -1,0 +1,32 @@
+*static nat
+ip nat inside source static [inside global] [inside local]
+int [interface]
+ip nat inside
+int [interface]
+ip nat outside
+wr memory
+===========================================================
+*dynamic nat
+access-list [id] permit [network|ip] [subnet mask] => ACL inside local
+(access-list 1 permit 192.168.0.0 0.0.0.255)
+ip nat pool MY_POOL [name start ip] [name end ip] netmask [netmask]
+(ip nat pool MY_POOL 4.4.4.1 4.4.4.5 netmask 255.255.255.0) => Pool inside global
+ip nat inside source list [acl-number] pool [name] => Tạo nat
+(ip nat inside source list 10 pool omnisecupool)
+int [interface]
+ip nat inside
+int [interface]
+ip nat outside
+===========================================================
+*debug
+debug ip nat
+no debug ip nat
+===========================================================
+*show
+sh ip nat translations
+sh ip nat statistics
+sh run
+===========================================================
+*
+- Config dynamic nat ko được, thì check xem router có dùng static nat ở cùng int hay ip ko.
+- Clear static nat thì check sh run, xem bỏ dòng nào thì gõ command no + dòng đó.

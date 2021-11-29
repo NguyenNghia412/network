@@ -1,0 +1,8 @@
+Lab:
+- 1 Router, 3 lớp (Core, Distribution, Access), 2 vlan (10 và 20).
+- Set Core làm vtp server, tạo vlan. Các lớp còn lại làm vtp client.
+- Giữa các lớp thì tạo trunk. Từ Access Switch sang host thì config access port.
+- Config các SVI trong Distribution Switch. Ở Core Switch cũng config SVI tương tự.
+- Bật ip routing ở cả DSW và CSW.
+- Config gateway sang router cho CoreSW.
+- 

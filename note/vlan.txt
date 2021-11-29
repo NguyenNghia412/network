@@ -1,0 +1,8 @@
+- Mỗi vlan như 1 physical switch
+- Access port là các port của mỗi vlan
+- Mỗi vlan ko thể giao tiếp với nhau trực tiếp, chỉ có thể giao tiếp trong vlan đó.
+Giống như 1 Layer 2 switch chỉ truyền packet của các host trong 1 network. 
+- Trunk port truyền được packet giữa các vlan khác nhau. Khi đi vào trunk port, các
+frame sẽ đc đánh Tag để biết nó đến từ vlan nào. Vào access port, hoặc vào trunk port
+nhưng từ native vlan thì frame sẽ được Untag.
+- Native vlan đc mặc định có id 1
